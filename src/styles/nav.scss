@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+nav {
+    background: $color-green-dark;
+
+    .inner-container {
+        display: flex;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    svg {
+        fill: $color-white;
+        height: 40px;
+        margin-left: auto;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

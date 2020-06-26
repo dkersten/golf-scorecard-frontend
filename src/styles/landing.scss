@@ -1,0 +1,100 @@
+@import './variables.scss';
+
+.landing header {
+    background: linear-gradient($color-green-transparent, $color-green-transparent), url("https://images.unsplash.com/photo-1443706340763-4b60757a36ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80");
+    background-size: cover;
+    background-position: center bottom;
+
+    .inner-container {
+        padding: 2rem 0;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: $vertical-space-md;
+
+        i {
+            font-size: 3.75rem;
+            color: $color-white-off;
+            text-shadow: $text-shadow-dark-header;
+        }
+    }
+
+    svg {
+        height: 3.75rem;
+        fill: $color-white-off;
+        text-shadow: $text-shadow-dark-header;
+    }
+
+    p {
+        text-align: center;
+        color: $color-white;
+        font-size: $font-size-reg;
+        text-shadow: $text-shadow-dark-paragraph;
+        line-height: 1.6;
+    }
+
+    .action-container {
+        margin-top: $vertical-space-md;
+        color: $color-white;
+        display: flex;
+        justify-content: center;
+
+        * {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        a {
+            background: $color-white-off;
+            color: $color-green-dark;
+        }
+    }
+}
+
+.landing h1 {
+    color: $color-white;
+    font-size: $font-size-lg;
+    text-shadow: $text-shadow-dark-header;
+    margin-bottom: $vertical-space-md;
+}
+
+.landing main {
+    padding-top: $vertical-space-lg;
+    padding-bottom: $vertical-space-lg;
+
+    h2 {
+        text-align: center;
+        font-size: $font-size-md;
+        color: $color-green-dark;
+        font-weight: 700;
+        margin-bottom: $vertical-space-md;
+    }
+
+    .card-container {
+
+    }
+}
+
+.landing .card-container section {
+    display: flex;
+  
+    * {
+        text-align: left;
+    }
+
+    .right {
+        margin-left: 1rem;
+    }
+
+    img {
+        width: 100px;
+        height: auto;
+    }
+
+    p {
+        font-size: $font-size-sm;
+        margin-top: $vertical-space-xs;
+        line-height: 1.3;
+    }
+}
