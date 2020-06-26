@@ -1,0 +1,68 @@
+@import './variables.scss';
+
+.profile {
+
+    main {
+        padding: $vertical-space-lg 0;
+        background: linear-gradient(to bottom right, $color-green, $color-green-dark);
+        min-height: 92.6vh;
+    }
+
+    .stat-container {
+        margin-top: $vertical-space-md;
+    }
+
+    h1, h2 {
+        color: $color-white;
+        text-align: center;
+    }
+
+    section.card {
+
+        text-align: left;
+
+        p {
+            color: $color-grey-lighter;
+            margin-bottom: $vertical-space-sm;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+
+        span {
+            color: $color-green-dark;
+            font-weight: 700;
+        }
+    }
+
+    h2 {
+        margin-top: $vertical-space-lg;
+        margin-bottom: $vertical-space-md;
+        font-size: $font-size-md;
+        text-align: center;
+    }
+
+    .scorecard-container {
+        display: flex;
+        flex-wrap: wrap;
+    
+        .card {
+            margin-left: .25rem;
+            margin-right: .25rem;
+            flex-basis: calc(50% - .5rem);
+            text-align: left;
+
+            p {
+                margin-bottom: $vertical-space-xs;
+                color: $color-grey-lighter;
+                font-size: $font-size-sm;
+
+                span {
+                    color: $color-green-dark;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}

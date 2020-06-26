@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import imgScore from '../media/score.png';
 import imgStats from '../media/stats.png';
 
@@ -13,8 +14,8 @@ const Landing = () => {
                     </div>
                     <p>Get course information and record your score in one place!</p>
                     <div className="action-container">
-                        <a href="#" className="login btn">Login</a>
-                        <a href="#" className="signup btn">Sign Up</a>
+                        <Link to="/login" className="login btn">Login</Link>
+                        <Link to="/signup" className="signup btn">Sign Up</Link>
                     </div>
                 </div>
             </header>

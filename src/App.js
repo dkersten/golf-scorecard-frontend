@@ -1,14 +1,21 @@
 import React, {Component} from 'react';
-import { Route, Switch, Redirect} from 'react-router-dom';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import Nav from './components/Nav.js';
 import Landing from './components/Landing.js';
+import Login from './components/Login.js';
+import Signup from './components/Signup.js';
+import Profile from './components/Profile.js';
 
 class App extends Component {
 
   state = {
-    courses: []
+    courses: [],
+    currentUser: {
+      firstName: 'Dan',
+      lastName: 'Kersten',
+      email: 'dk@hi.com'
+    }
   }
 
   componentDidMount() {
@@ -18,11 +25,16 @@ class App extends Component {
   }
 
   render() {
-    
+    // console.log(this.state.courses)
     return (
       <div className="App">
         <Nav />
-        <Landing />
+        <Switch>
+          <Route path="/profile" render={() => <Profile user={this.state.currentUser} />} />
+          <Route path="/login" render={() => <Login />} />
+          <Route path="/signup" render={() => <Signup />} />
+          <Route path="/" component={Landing} />
+        </Switch>
       </div>
     );
   }
