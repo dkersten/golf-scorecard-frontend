@@ -4,6 +4,7 @@ import CourseCard from '../components/CourseCard.js';
 class CourseContainer extends Component {
 
     render() {
+
         return(
             <div className="courses">
                 <main>
@@ -11,7 +12,7 @@ class CourseContainer extends Component {
                         <h1>Courses</h1>
                         <div className="course-container">
                             {
-                                this.props.courses.map(course => <CourseCard key={course.id} {...course} />)
+                                this.props.courses.map(course => <CourseCard key={course.id} name={course.name} holes={this.props.holes} />)
                             }
                         </div>
                     </div>
