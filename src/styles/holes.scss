@@ -1,0 +1,56 @@
+@import './variables.scss';
+
+.individual-course {
+
+    main {
+        padding: $vertical-space-lg 0;
+        background: linear-gradient(to bottom right, $color-green, $color-green-dark);
+        min-height: 92.6vh;
+
+        section.stats {
+            margin-bottom: $vertical-space-md;
+
+            p {
+                color: $color-white;
+                font-weight: 700;
+                line-height: 1.6;
+            }
+        }
+
+        .hole-container {
+            max-width: 100%;
+
+            * {
+                color: $color-grey-lighter;
+            }
+
+            h2 {
+                font-size: $font-size-md;
+                margin-bottom: $vertical-space-sm;
+                
+                span {
+                    color: $color-green-dark;
+                }
+            }
+
+            p {
+                line-height: 1.4;
+
+                span {
+                    color: $color-green-dark;
+                    font-weight: 700;
+                }
+            }
+
+            img {
+                margin-top: $vertical-space-sm;
+                max-width: 80%;
+            }
+        }
+    }
+
+    h1 {
+        color: $color-white;
+        margin-bottom: $vertical-space-md;
+    }
+}

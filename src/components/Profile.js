@@ -40,7 +40,7 @@ const Profile = (props) => {
                             <div className="scorecard-overview card">
                                 <p>Course: <span>Holiday Valley</span></p>
                                 <p>Date: <span>6/22/20</span></p>
-                                <p>Score: <span>91Profile</span></p>
+                                <p>Score: <span>91</span></p>
                             </div>
                         </div>
                     </div>
