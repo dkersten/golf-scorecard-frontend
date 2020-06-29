@@ -6,6 +6,7 @@ import Landing from './components/Landing.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Profile from './components/Profile.js';
+import CourseContainer from './containers/CourseContainer.js'
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
         <Nav />
         <Switch>
           <Route path="/profile" render={() => <Profile user={this.state.currentUser} />} />
+          <Route path="/courses" render={() => <CourseContainer courses={this.state.courses} />} />
           <Route path="/login" render={() => <Login />} />
           <Route path="/signup" render={() => <Signup />} />
           <Route path="/" component={Landing} />

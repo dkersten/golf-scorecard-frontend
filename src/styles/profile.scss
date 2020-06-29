@@ -18,8 +18,13 @@
     }
 
     section.card {
-
         text-align: left;
+
+        svg {
+            height: 150px;
+            width: 150px;
+            fill: red;
+        }
 
         p {
             color: $color-grey-lighter;

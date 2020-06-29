@@ -1,0 +1,53 @@
+@import './variables.scss';
+
+.courses {
+
+    main {
+        padding: $vertical-space-lg 0;
+        background: linear-gradient(to bottom right, $color-green, $color-green-dark);
+        min-height: 92.6vh;
+    }
+
+    h1 {
+        color: $color-white;
+    }
+
+    .course-container {
+        margin-top: $vertical-space-md;
+        display: flex;
+        flex-wrap: wrap;
+
+        .course-card {
+            margin-left: .25rem;
+            margin-right: .25rem;
+            flex-basis: calc(50% - .5rem);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            * {
+                text-align: center;
+            }
+        }
+
+        h2, p {
+            margin-bottom: $vertical-space-xs;
+        }
+
+        h2 {
+            font-size: $font-size-reg;
+            color: $color-green-dark;
+        }
+
+        p {
+            color: $color-grey-lighter;
+        }
+
+        svg {
+            fill: $color-green-dark;
+            height: 3.5rem;
+            margin-bottom: $vertical-space-sm;
+        }
+    }
+}
