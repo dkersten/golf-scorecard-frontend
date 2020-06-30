@@ -55,7 +55,7 @@ class App extends Component {
         <Nav />
         <Switch>
           <Route path="/scorecard" render={() => <ScoreCard />} />
-          <Route path="/profile" render={() => <Profile user={this.state.currentUser} scorecards={this.state.scorecards} />} />
+          <Route path="/profile" render={() => <Profile user={this.state.currentUser} courses={this.state.courses} scorecards={this.state.curentUserScorecards} />} />
           <Route path="/courses/:id" component={CourseContainer} />
           <Route path="/courses" render={() => <CoursesContainer courses={this.state.courses} holes={this.state.holes} />} />
           <Route path="/login" render={() => <Login />} />
@@ -68,9 +68,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-{/* <Route path="/users/:id" render={() => <User />} /> */}
-{/* <Route 
- path="/user/:userId"
- component={UserComponent} /> */}

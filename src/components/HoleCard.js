@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HoleCard = (props) => {
-    const {id, name, picture, par, distance } = props
+    const {name, picture, par, distance } = props
     let num = name.split(" ")
     num = num[num.length - 1]
     return(
