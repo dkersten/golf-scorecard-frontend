@@ -20,6 +20,11 @@
         th, td {
             width: 33.333%;
             text-align: center;
+            overflow: hidden;
+
+            tr {
+                overflow: hidden;
+            }
         }
 
         th {

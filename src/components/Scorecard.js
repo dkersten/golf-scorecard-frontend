@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import ScorecardRow from './ScorecardRow.js'
 
 class ScoreCard extends Component {
 
-    state = {}
+    state = {
+        numHoles: '',
+        scores_front: [],
+        scores_back: [],
+        currentTotalScore: 0
+    }
+
+
 
     handleChange = (e) => {
         this.setState({
@@ -15,45 +23,96 @@ class ScoreCard extends Component {
         console.log(this.state)
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState !== this.state) {
-            let scoreObj = this.state
-            const scores = Object.values(scoreObj)
-            // console.log(scores)
-            if (scores.length > 1) {
-                this.computeScoreTotal(scores)
-            } else {
-                this.computeScoreTotal(scores[0])
-            }
-        }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (prevState !== this.state) {
+    //         let scoreObj = this.state
+    //         const scores = Object.values(scoreObj)
+    //         // console.log(scores)
+    //         if (scores.length > 1) {
+    //             this.computeScoreTotal(scores)
+    //         } else {
+    //             this.computeScoreTotal(scores[0])
+    //         }
+    //     }
+    // }
+
+    // computeScoreTotal = scores => {
+    //     let totalScore = 0
+    //     if (scores === undefined) {
+    //         return 0
+    //     } else {
+    //         if (scores.length === 1) {
+    //             totalScore = Number(scores)
+    //             console.log(totalScore)
+    //             return totalScore        
+    //         } else if (scores.length > 1) {
+    //             for (const score of scores) {
+    //                 totalScore += (Number(score))
+    //             }
+    //             console.log(totalScore)
+    //             return totalScore
+    //         }
+    //     }
+    // }
+
+    handleChange9 = () => {
+        this.setState({
+            numHoles: 9
+        })
     }
 
-    computeScoreTotal = scores => {
-        let totalScore = 0
-        if (scores === undefined) {
-            return 0
-        } else {
-            if (scores.length === 1) {
-                totalScore = Number(scores)
-                console.log(totalScore)
-                return totalScore        
-            } else if (scores.length > 1) {
-                for (const score of scores) {
-                    totalScore += (Number(score))
-                }
-                console.log(totalScore)
-                return totalScore
+    handleChange18 = () => {
+        this.setState({
+            numHoles: 18
+        })
+    }
+
+    cardNumHoles = () => {
+        if (this.state.numHoles === 9) {
+            
+            const holes = 9
+            const rows = []
+            for (let i = 1; i <= holes; i++) {
+                rows.push( <ScorecardRow key={i} num={i} />)
+
             }
+            return rows
+        } else if (this.state.numHoles === 18) {
+            const holes = 18
+            const rows = []
+            for (let i = 0; i <= holes; i++) {
+                rows.push( <ScorecardRow key={i} num={i} /> )
+            }
+            return rows
         }
     }
 
     render() {
-        // console.log("2".length)
-        // console.log(this.computeScoreTotal())
+        // console.log(this.state.numHoles)
         return(
             <div className="scorecard">
                 <main>
                     <div className="inner-container">
+
+                        <div className="scorecard-options card">
+                            <h2>Scorecard Options</h2>
+                            <div className="controls">
+                                <p>9 or 18 hole?</p>
+                                <button onClick={this.handleChange9} className="btn">9 holes</button>
+                                <button onClick={this.handleChange18} className="btn">18 holes</button>
+
+                                <p>Are you playing one of the following courses?</p>
+                                <select onChange={this.handleCourseName}>
+                                    <option></option>
+                                    <option value="none">None of these</option>
+                                    <option value="brighton">Brighton</option>
+                                    <option value="manatee">Manatee</option>
+                                    <option value="sheridan">Sheridan</option>
+                                    <option value="terry">Terry Hills</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <form onSubmit={this.submitScorecard}>
                             <table>
                                 <thead>
@@ -63,7 +122,10 @@ class ScoreCard extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    {
+                                        this.cardNumHoles()
+                                    }
+                                    {/* <tr>
                                         <td>1</td>
                                         <td><input name="h1" value={this.state.h1} onChange={this.handleChange} type="text" placeholder="Hole Score" /></td>
                                     </tr>
@@ -134,16 +196,16 @@ class ScoreCard extends Component {
                                     <tr>
                                         <td>18</td>
                                         <td><input name="h18" value={this.state.h18} onChange={this.handleChange} type="text" placeholder="Hole Score" /></td>
-                                    </tr>
+                                    </tr> */}
                                     <tr>
                                         <td>Total</td>
                                         <td>
-                                            { this.computeScoreTotal() }
+                                            Update
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <input type="submit"/>
+                            <input className="btn" type="submit"/>
                         </form>
                     </div>
                 </main>
