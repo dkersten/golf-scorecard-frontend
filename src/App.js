@@ -53,14 +53,33 @@ class App extends Component {
     return (
       <div className="App">
         <Nav />
+
         <Switch>
-          <Route path="/scorecard" render={() => <ScoreCard courses={this.state.courses} />} />
-          <Route path="/profile" render={() => <Profile user={this.state.currentUser} courses={this.state.courses} scorecards={this.state.curentUserScorecards} />} />
+
+          <Route path="/scorecard" render={() => <ScoreCard 
+            courses={this.state.courses}
+            userId={this.state.currentUser.id} />} 
+          />
+
+          <Route path="/profile" render={() => <Profile 
+            user={this.state.currentUser} 
+            courses={this.state.courses} 
+            scorecards={this.state.curentUserScorecards} />} 
+          />
+
           <Route path="/courses/:id" component={CourseContainer} />
-          <Route path="/courses" render={() => <CoursesContainer courses={this.state.courses} holes={this.state.holes} />} />
+
+          <Route path="/courses" render={() => <CoursesContainer 
+            courses={this.state.courses} 
+            holes={this.state.holes} />} 
+          />
+
           <Route path="/login" render={() => <Login />} />
+
           <Route path="/signup" render={() => <Signup />} />
+
           <Route path="/" component={Landing} />
+
         </Switch>
       </div>
     );

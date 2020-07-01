@@ -4,60 +4,79 @@ import ScorecardOverview from './ScorecardOverview.js'
 const Profile = (props) => {
 
     const scorecards = props.scorecards
-    console.log(scorecards)
-
     const bestRoundScore18 = () => {
         const scoresArr = []
-        // if (props.scorecards.scores_back)
         for (const scorecard of scorecards) {
-            const front9 = scorecard.scores_front
-            const back9 = scorecard.scores_back
+            if (scorecard.scores_front !== null && scorecard.scores_back !== null) {
+                let f9 = scorecard.scores_front
+                let b9 = scorecard.scores_back
+                // console.log(f9, b9)
+                if (f9.length > 0 && b9.length > 0) {
+                    let totalScore = f9.concat(b9)
+                    const add = (a,b) => a + b
+                    const sum = totalScore.reduce(add)
+                    scoresArr.push(sum)
+                }
+            }
 
-            if (front9 !== null && back9 !== null) {
-                let totalScore = front9.concat(back9)
-                const add = (a,b) => a + b
-                const sum = totalScore.reduce(add)
-                scoresArr.push(sum)
+            if (scoresArr.length > 0) {
+                const scores = scoresArr
+                Array.min = function(scores){
+                    return Math.min.apply(Math, scores)
+                }
+                const bestScore = Array.min(scores)
+                return bestScore
+            } else if (scoresArr === 0) {
+                return "NA"
             }
-        }
-        
-        if (scoresArr.length > 0) {
-            const scores = scoresArr
-            Array.min = function(scores){
-                return Math.min.apply(Math, scores);
-            }
-            const bestScore = Array.min(scores)
-            return bestScore
         }
     }
 
     const bestRoundScore9 = () => {
         const scoresArr = []
         for (const scorecard of scorecards) {
-            const front9 = scorecard.scores_front
-            const back9 = scorecard.scores_back
-
-            if (front9 !== null) {
-                const add = (a,b) => a + b
-                const sum = front9.reduce(add)
-                scoresArr.push(sum)
-            } else if (back9 !== null) {
-                const add = (a,b) => a + b
-                const sum = back9.reduce(add)
-                scoresArr.push(sum)
+            if (scorecard.scores_front === null || scorecard.scores_back === null) {
+                let f9 = scorecard.scores_front
+                let b9 = scorecard.scores_back
+                if (scorecard.scores_back === null) {
+                    let totalScore = f9
+                    const add = (a,b) => a + b
+                    const sum = totalScore.reduce(add)
+                    scoresArr.push(sum)
+                } else if (scorecard.scores_front === null) {
+                    let totalScore = b9
+                    const add = (a,b) => a + b
+                    const sum = totalScore.reduce(add)
+                    scoresArr.push(sum)
+                }
+            } else {
+                let f9 = scorecard.scores_front
+                let b9 = scorecard.scores_back
+                if (scorecard.scores_back.length == 0) {
+                    let totalScore = f9
+                    const add = (a,b) => a + b
+                    const sum = totalScore.reduce(add)
+                    scoresArr.push(sum)
+                } else if (scorecard.scores_front.length == 0) {
+                    let totalScore = b9
+                    const add = (a,b) => a + b
+                    const sum = totalScore.reduce(add)
+                    scoresArr.push(sum)
+                }
             }
-        }
 
-        if (scoresArr.length > 0) {
-            const scores = scoresArr
-            Array.min = function(scores){
-                return Math.min.apply(Math, scores);
+            if (scoresArr.length > 0) {
+                const scores = scoresArr
+                Array.min = function(scores){
+                    return Math.min.apply(Math, scores)
+                }
+                const bestScore = Array.min(scores)
+                return bestScore
+            } else if (scoresArr === 0) {
+                return "NA"
             }
-            const bestScore = Array.min(scores)
-            return bestScore
         }
     }
-    
 
     const numofRounds = () => {
         if (scorecards.length === 0) {

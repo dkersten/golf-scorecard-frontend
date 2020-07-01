@@ -7,6 +7,7 @@ class ScoreCard extends Component {
         numHoles: '',
         scores_front: [],
         scores_back: [],
+        course_id: null,
         currentTotalScore: 0
     }
 
@@ -46,40 +47,86 @@ class ScoreCard extends Component {
 
     submitScorecard = (e) => {
         e.preventDefault()
-        console.log("submit form")
+
+        fetch("http://localhost:3000/scorecards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: this.props.userId,
+                course_id: this.state.course_id,
+                scores_front: this.state.scores_front,
+                scores_back: this.state.scores_back
+            })
+        })
+            .then(resp => resp.json())
+            .then(scorecard => console.log(scorecard))
+
+
+        // console.log({
+        //     user_id: this.props.userId,
+        //     course_id: this.state.course_id,
+        //     scores_front: this.state.scores_front,
+        //     scores_back: this.state.scores_back
+        // })
+        e.target.reset()
+        this.setState({
+            scores_front: [],
+            scores_back: [],
+        })
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (prevState !== this.state) {
-    //         let scoreObj = this.state
-    //         const scores = Object.values(scoreObj)
-    //         // console.log(scores)
-    //         if (scores.length > 1) {
-    //             this.computeScoreTotal(scores)
-    //         } else {
-    //             this.computeScoreTotal(scores[0])
-    //         }
-    //     }
+
+    // {
+    //     "id": 1,
+    //     "user_id": 1,
+    //     "course_id": 9,
+    //     "scores_front": [],
+    //     "scores_back": []
     // }
 
-    // computeScoreTotal = scores => {
-    //     let totalScore = 0
-    //     if (scores === undefined) {
-    //         return 0
-    //     } else {
-    //         if (scores.length === 1) {
-    //             totalScore = Number(scores)
-    //             console.log(totalScore)
-    //             return totalScore        
-    //         } else if (scores.length > 1) {
-    //             for (const score of scores) {
-    //                 totalScore += (Number(score))
-    //             }
-    //             console.log(totalScore)
-    //             return totalScore
-    //         }
-    //     }
-    // }
+    computeScoreTotal = () => {
+        const f9 = this.state.scores_front
+        const b9 = this.state.scores_back
+        if (f9.length > 0 && b9.length === 0 ) {
+            const add = (a,b) => a + b
+            const sum = f9.reduce(add)
+            return sum
+        } else if (f9.length > 0 && b9.length > 0) {
+            const allArr = f9.concat(b9)
+            const add = (a,b) => a + b
+            const sum = allArr.reduce(add)
+            return sum
+        } else {
+            return 0
+        }
+    }
+
+    handleCourseName = (e) => {
+        if (e.target.value === "brighton") {
+            this.setState({
+                course_id: 9
+            })
+        } else if (e.target.value === "sheridan") {
+            this.setState({
+                course_id: 10
+            })
+        } else if (e.target.value === "terry") {
+            this.setState({
+                course_id: 11
+            })
+        } else if (e.target.value === "manatee") {
+            this.setState({
+                course_id: 12
+            })
+        } else {
+            this.setState({
+                course_id: null
+            })
+        }
+    }
 
     handleChange9 = () => {
         this.setState({
@@ -94,8 +141,6 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log("F:", this.state.scores_front, this.state.scores_front.length)
-        console.log("B:", this.state.scores_back, this.state.scores_back.length)
         return(
             <div className="scorecard">
                 <main>
@@ -121,6 +166,7 @@ class ScoreCard extends Component {
                         </div>
 
                         <form onSubmit={this.submitScorecard}>
+                        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
                             <table>
                                 <thead>
                                     <tr>
@@ -135,7 +181,7 @@ class ScoreCard extends Component {
                                     <tr>
                                         <td>Total</td>
                                         <td>
-                                            Update
+                                            { this.computeScoreTotal() }
                                         </td>
                                     </tr>
                                     <tr>
