@@ -7,7 +7,7 @@ class ScoreCard extends Component {
         numHoles: '',
         scores_front: [],
         scores_back: [],
-        course_id: null,
+        course_id: 13,
         currentTotalScore: 0
     }
 
@@ -123,7 +123,7 @@ class ScoreCard extends Component {
             })
         } else {
             this.setState({
-                course_id: null
+                course_id: 13
             })
         }
     }
@@ -141,6 +141,7 @@ class ScoreCard extends Component {
     }
 
     render() {
+        console.log(this.state.course_id)
         return(
             <div className="scorecard">
                 <main>
@@ -155,7 +156,6 @@ class ScoreCard extends Component {
 
                                 <p>Are you playing one of the following courses?</p>
                                 <select onChange={this.handleCourseName}>
-                                    <option></option>
                                     <option value="none">None of these</option>
                                     <option value="brighton">Brighton</option>
                                     <option value="manatee">Manatee</option>
