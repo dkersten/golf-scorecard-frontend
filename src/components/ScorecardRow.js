@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const ScorecardRow = (props) => {
-    return(
-        <tr>
-            <td>{props.num}</td>
-            <td><input name={props.num} type="text" placeholder="Score" /></td>
-        </tr>
-    )
+class ScorecardRow extends Component {
+    state = {
+        
+    }
+
+    handleChange = (e) => {
+        this.props.changeFunc(parseInt(e.target.value))
+    }
+
+    render() {
+        // console.log(this.props)
+        return(
+            <tr>
+                <td>{this.props.num}</td>
+                <td><input onChange={this.handleChange} name={this.props.num} type="text" placeholder="Score" /></td>
+            </tr>
+        )
+    }
 }
-
-{/* <tr>
-    <td>1</td>
-    <td><input name="h1" value={this.state.h1} onChange={this.handleChange} type="text" placeholder="Hole Score" /></td>
-</tr> */}
 
 export default ScorecardRow
