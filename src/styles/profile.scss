@@ -68,6 +68,27 @@
                     font-weight: 700;
                 }
             }
+
+            button.show, button.hide {
+                text-align: center;
+                margin: 0 auto;
+                display: block;
+                color: $color-grey-lighter;
+                border: none;
+            }
+
+            .options {
+                margin-top: $vertical-space-sm;
+                display: flex;
+                justify-content: center;
+
+                button {
+                    margin: 0 .5rem;
+                    border: none;
+                    background: $color-green-dark;
+                    color: $color-white;
+                }
+            }
         }
     }
 }

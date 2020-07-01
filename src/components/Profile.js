@@ -52,12 +52,12 @@ const Profile = (props) => {
             } else {
                 let f9 = scorecard.scores_front
                 let b9 = scorecard.scores_back
-                if (scorecard.scores_back.length == 0) {
+                if (scorecard.scores_back.length === 0) {
                     let totalScore = f9
                     const add = (a,b) => a + b
                     const sum = totalScore.reduce(add)
                     scoresArr.push(sum)
-                } else if (scorecard.scores_front.length == 0) {
+                } else if (scorecard.scores_front.length === 0) {
                     let totalScore = b9
                     const add = (a,b) => a + b
                     const sum = totalScore.reduce(add)
@@ -105,6 +105,7 @@ const Profile = (props) => {
                                     date={scorecard.created_at} 
                                     scoresFront={scorecard.scores_front} 
                                     scoresBack={scorecard.scores_back}
+                                    scorecardID={scorecard.id}
                                     courseID={scorecard.course_id}
                                     courses={props.courses} />)
                             }
