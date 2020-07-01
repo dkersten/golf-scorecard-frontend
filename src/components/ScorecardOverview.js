@@ -14,6 +14,16 @@ class ScorecardOverview extends Component {
         }
     }
 
+    formatDate = () => {
+        let dateObj = new Date(this.props.date)
+        let month = dateObj.getMonth()
+        let day = String(dateObj.getDate()).padStart(2, '0');
+        let year = dateObj.getFullYear();
+        let date = `${month}/${day}/${year}`
+        console.log(date)
+        return date
+    }
+
     computeScore = () => {
         if (this.props.scoresFront !== null && this.props.scoresBack !== null ) {
             const totalScoreArr = this.props.scoresFront.concat(this.props.scoresBack)
@@ -57,10 +67,11 @@ class ScorecardOverview extends Component {
     }
 
     render() {
+        this.formatDate()
         return(
             <div className="scorecard-overview card">
                 <p>Course: <span>{this.courseName()}</span></p>
-                <p>Date: <span>{this.props.date }</span></p>
+                <p>Date: <span>{this.formatDate() }</span></p>
                 <p>Score: <span>{this.computeScore()}</span></p>
                 { this.state.moreClicked ? 
                     <button onClick={this.toggleMore} className="hide">Hide Options &#x25B4;</button> 

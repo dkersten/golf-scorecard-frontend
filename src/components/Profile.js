@@ -97,7 +97,7 @@ const Profile = (props) => {
                             <p>Your best score on 18 holes is <span>{ bestRoundScore18() }</span></p>
                             <p>Your best score on 9 holes is <span>{ bestRoundScore9() }</span></p>
                         </section>
-                        <h2>Your previous scorecards</h2>
+                        <h2>Your previous rounds</h2>
                         <div className="scorecard-container">
                             {
                                 props.scorecards.map(scorecard => <ScorecardOverview 
