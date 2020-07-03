@@ -16,11 +16,14 @@
         margin-top: $vertical-space-md;
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
+
+        > div {
+    
+        }
 
         .course-card {
-            margin-left: .25rem;
-            margin-right: .25rem;
-            flex-basis: calc(50% - .5rem);
+            
             text-decoration: none;
 
             display: flex;

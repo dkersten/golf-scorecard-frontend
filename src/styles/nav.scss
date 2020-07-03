@@ -1,7 +1,8 @@
 @import './variables.scss';
 
 nav {
-    background: $color-green-dark;
+    background: $color-grey-darker;
+    position: relative;
 
     .inner-container {
         display: flex;
@@ -9,13 +10,49 @@ nav {
         padding-bottom: 1rem;
     }
 
+    .btn-container {
+        margin-left: auto;
+    }
+
     svg {
         fill: $color-white;
         height: 40px;
-        margin-left: auto;
 
         &:hover {
             cursor: pointer;
         }
+    }
+
+    .nav-links {
+        display: block;
+        position: absolute;
+        bottom: -9.75rem;
+        right: 5%;
+        width: 90% ;
+        background-color: $color-grey-darker;
+        border-radius: 0 0 $border-radius-sm $border-radius-sm;
+        box-shadow: $box-shadow-nat;
+
+        li {
+            padding: $vertical-space-sm;
+            text-align: right;
+
+            &:first-of-type {
+                margin-top: $vertical-space-md;
+            }
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid $color-grey-lighter;
+            }
+
+            a {
+                text-decoration: none;
+                color: $color-white;
+            }
+        }
+    }
+
+    .close {
+        height: 0;
     }
 }

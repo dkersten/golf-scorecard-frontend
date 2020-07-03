@@ -20,7 +20,6 @@ class ScorecardOverview extends Component {
         let day = String(dateObj.getDate()).padStart(2, '0');
         let year = dateObj.getFullYear();
         let date = `${month}/${day}/${year}`
-        console.log(date)
         return date
     }
 
