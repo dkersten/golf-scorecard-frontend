@@ -54,7 +54,6 @@ class CourseCard extends Component {
     }
 
     render() {
-        console.log(this.props.name)
         return(
             <div>
                 { this.conditionalRenderingCourseCard() }

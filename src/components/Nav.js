@@ -25,9 +25,15 @@ class Nav extends Component {
         }
     }
 
+    closeNavMenu = () => {
+        this.setState({
+            openNav: !this.state.openNav
+        })
+    }
+
     navOpen = () => {
         return(
-            <div className="nav-links">
+            <div onClick={this.closeNavMenu} className="nav-links">
                 <ul>
                     <li><NavLink to="/scorecard">Create New Scorecard</NavLink></li>
                     <li><NavLink to="/profile">Profile</NavLink></li>
