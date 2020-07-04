@@ -37,7 +37,7 @@ class ScoreCard extends Component {
             const holes = 9
             const rows = []
             for (let i = 1; i <= holes; i++) {
-                rows.push( <ScorecardRow key={i} num={i} changeFunc={this.updateScores} />)
+                rows.push( <ScorecardRow key={i} num={i} changeFunc={this.updateScores} scores={this.state.scores} />)
 
             }
             return rows
@@ -45,24 +45,20 @@ class ScoreCard extends Component {
             const holes = 18
             const rows = []
             for (let i = 1; i <= holes; i++) {
-                rows.push( <ScorecardRow key={i} num={i} changeFunc={this.updateScores} /> )
+                rows.push( <ScorecardRow key={i} num={i} changeFunc={this.updateScores} scores={this.state.scores} /> )
             }
             return rows
         }
     }
 
-    updateScores = (score) => {
-        // console.log(score)
-        if (this.state.scores_front.length < 9) {
-            this.setState({
-                scores_front: [...this.state.scores_front, score]
-            })
-        } else {
-            this.setState({
-                scores_back: [...this.state.scores_back, score]
-            })
-        }
-        
+    updateScores = (score, holeNum) => {
+        const scoreInt = parseInt(score)
+        const { scores} = this.state
+        const currentState = scores
+        currentState[holeNum] = scoreInt
+        this.setState({
+            scores: currentState
+        })
     }
 
     submitScorecard = (e) => {

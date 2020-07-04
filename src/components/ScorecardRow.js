@@ -6,14 +6,15 @@ class ScorecardRow extends Component {
     }
 
     handleChange = (e) => {
-        this.props.changeFunc(parseInt(e.target.value))
+        this.props.changeFunc(e.target.value, this.props.num)
     }
 
     render() {
+        const index = this.props.num
         return(
             <tr>
                 <td>{this.props.num}</td>
-                <td><input onChange={this.handleChange} name={`n${this.props.num}`} type="text" placeholder="Score" /></td>
+                <td><input value={this.props.scores[index]} onChange={this.handleChange} name={index} type="number" placeholder="Score" /></td>
             </tr>
         )
     }
