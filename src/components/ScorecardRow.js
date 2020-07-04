@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class ScorecardRow extends Component {
     state = {
-        
+
     }
 
     handleChange = (e) => {
@@ -10,11 +10,10 @@ class ScorecardRow extends Component {
     }
 
     render() {
-        // console.log(this.props)
         return(
             <tr>
                 <td>{this.props.num}</td>
-                <td><input onChange={this.handleChange} name={this.props.num} type="text" placeholder="Score" /></td>
+                <td><input onChange={this.handleChange} name={`n${this.props.num}`} type="text" placeholder="Score" /></td>
             </tr>
         )
     }

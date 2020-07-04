@@ -8,7 +8,27 @@ class ScoreCard extends Component {
         scores_front: [],
         scores_back: [],
         course_id: 13,
-        currentTotalScore: 0
+        currentTotalScore: 0,
+        scores: {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            9: 0,
+            10: 0,
+            11: 0,
+            12: 0,
+            13: 0,
+            14: 0,
+            15: 0,
+            16: 0,
+            17: 0,
+            18: 0
+        }
     }
 
     cardNumHoles = () => {
@@ -63,38 +83,29 @@ class ScoreCard extends Component {
         })
             .then(resp => resp.json())
             .then(scorecard => console.log(scorecard))
-
-
-        // console.log({
-        //     user_id: this.props.userId,
-        //     course_id: this.state.course_id,
-        //     scores_front: this.state.scores_front,
-        //     scores_back: this.state.scores_back
-        // })
-        e.target.reset()
-        this.setState({
-            scores_front: [],
-            scores_back: [],
-        })
+            .then(() => e.target.reset()) // get rid when this is turn into fully controlled form
+            .then(() => this.setState({
+                scores_front: [],
+                scores_back: [],
+            }))   
     }
-
-
-    // {
-    //     "id": 1,
-    //     "user_id": 1,
-    //     "course_id": 9,
-    //     "scores_front": [],
-    //     "scores_back": []
-    // }
 
     computeScoreTotal = () => {
         const f9 = this.state.scores_front
         const b9 = this.state.scores_back
-        if (f9.length > 0 && b9.length === 0 ) {
+
+        let resultF = f9.every(function (e) {
+            return !isNaN(e)
+        })
+        let resultB = b9.every(function (e) {
+            return !isNaN(e)
+        }) 
+
+        if (f9.length > 0 && b9.length === 0 && resultF) {
             const add = (a,b) => a + b
             const sum = f9.reduce(add)
             return sum
-        } else if (f9.length > 0 && b9.length > 0) {
+        } else if (f9.length > 0 && b9.length > 0 && resultF && resultB) {
             const allArr = f9.concat(b9)
             const add = (a,b) => a + b
             const sum = allArr.reduce(add)
@@ -141,7 +152,6 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log(this.state.course_id)
         return(
             <div className="scorecard">
                 <main>
