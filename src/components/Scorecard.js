@@ -61,8 +61,34 @@ class ScoreCard extends Component {
         })
     }
 
+    formatScores = () => {
+        const scoreArr = Object.values(this.state.scores)
+        const scores = scoreArr.filter((item) => item !== 0)
+        if (scores.length === 9) {
+            this.setState({
+                scores_front: scores
+            })
+        } else if (scores.length === 18) {
+            const f9 = scores.slice(0, 9)
+            const b9 = scores.slice(9,18)
+            this.setState({
+                scores_front: f9,
+                scores_back: b9
+            })
+        }
+    }
+
     submitScorecard = (e) => {
         e.preventDefault()
+        let format = async () => {this.formatScores()}
+            format().then(() => this.postScorecard()) 
+    }
+
+    postScorecard = () => {
+        const { scores } = this.state
+        let resetScores = scores
+        resetScores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0, 18: 0
+        }
 
         fetch("http://localhost:3000/scorecards", {
             method: "POST",
@@ -79,11 +105,14 @@ class ScoreCard extends Component {
         })
             .then(resp => resp.json())
             .then(scorecard => console.log(scorecard))
-            .then(() => e.target.reset()) // get rid when this is turn into fully controlled form
+            .then(() => this.setState({
+                scores: resetScores
+            }))
             .then(() => this.setState({
                 scores_front: [],
                 scores_back: [],
-            }))   
+                numHoles: ''
+            }))
     }
 
     computeScoreTotal = () => {
@@ -148,6 +177,7 @@ class ScoreCard extends Component {
     }
 
     render() {
+        console.log(this.state)
         return(
             <div className="scorecard">
                 <main>

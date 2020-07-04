@@ -4,6 +4,7 @@ import ScorecardOverview from './ScorecardOverview.js'
 const Profile = (props) => {
 
     const scorecards = props.scorecards
+    console.log(scorecards)
     const bestRoundScore18 = () => {
         const scoresArr = []
         for (const scorecard of scorecards) {
@@ -34,7 +35,9 @@ const Profile = (props) => {
 
     const bestRoundScore9 = () => {
         const scoresArr = []
-        for (const scorecard of scorecards) {
+        // console.log(scorecards)
+        for (const scorecard of props.scorecards) {
+            console.log(scorecard)
             if (scorecard.scores_front === null || scorecard.scores_back === null) {
                 let f9 = scorecard.scores_front
                 let b9 = scorecard.scores_back
