@@ -116,27 +116,15 @@ class ScoreCard extends Component {
     }
 
     computeScoreTotal = () => {
-        const f9 = this.state.scores_front
-        const b9 = this.state.scores_back
-
-        let resultF = f9.every(function (e) {
-            return !isNaN(e)
-        })
-        let resultB = b9.every(function (e) {
-            return !isNaN(e)
-        }) 
-
-        if (f9.length > 0 && b9.length === 0 && resultF) {
-            const add = (a,b) => a + b
-            const sum = f9.reduce(add)
-            return sum
-        } else if (f9.length > 0 && b9.length > 0 && resultF && resultB) {
-            const allArr = f9.concat(b9)
-            const add = (a,b) => a + b
-            const sum = allArr.reduce(add)
-            return sum
+        const scores = Object.values(this.state.scores)
+        // console.log(scores)
+        if (scores.includes(NaN)) {
+            return "hole can't be blank"
         } else {
-            return 0
+            const add = (a,b) => a + b
+            const sum = scores.reduce(add)
+            // console.log(sum)
+            return sum
         }
     }
 
@@ -177,7 +165,7 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <div className="scorecard">
                 <main>
