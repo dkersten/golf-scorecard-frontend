@@ -4,7 +4,7 @@ import ScorecardOverview from './ScorecardOverview.js'
 const Profile = (props) => {
 
     const scorecards = props.scorecards
-    // console.log(scorecards)
+
     const bestRoundScore18 = () => {
         const scoresArr = []
         for (const scorecard of scorecards) {
@@ -35,35 +35,19 @@ const Profile = (props) => {
 
     const bestRoundScore9 = () => {
         const scoresArr = []
-        // console.log(scorecards)
-        for (const scorecard of props.scorecards) {
-            // console.log(scorecard)
-            if (scorecard.scores_front === null || scorecard.scores_back === null) {
-                let f9 = scorecard.scores_front
-                let b9 = scorecard.scores_back
-                if (scorecard.scores_back === null) {
-                    let totalScore = f9
+        
+        if (scorecards.length > 0) {
+            for (const scorecard of scorecards) {
+                const f9 = scorecard.scores_front
+                const b9 = scorecard.scores_back
+                // console.log(f9, b9)
+                if (b9 === null || b9.length === 0) {
                     const add = (a,b) => a + b
-                    const sum = totalScore.reduce(add)
+                    const sum = f9.reduce(add)
                     scoresArr.push(sum)
-                } else if (scorecard.scores_front === null) {
-                    let totalScore = b9
+                } else if (f9 === null || f9.length === 0) {
                     const add = (a,b) => a + b
-                    const sum = totalScore.reduce(add)
-                    scoresArr.push(sum)
-                }
-            } else {
-                let f9 = scorecard.scores_front
-                let b9 = scorecard.scores_back
-                if (scorecard.scores_back.length === 0) {
-                    let totalScore = f9
-                    const add = (a,b) => a + b
-                    const sum = totalScore.reduce(add)
-                    scoresArr.push(sum)
-                } else if (scorecard.scores_front.length === 0) {
-                    let totalScore = b9
-                    const add = (a,b) => a + b
-                    const sum = totalScore.reduce(add)
+                    const sum = b9.reduce(add)
                     scoresArr.push(sum)
                 }
             }
