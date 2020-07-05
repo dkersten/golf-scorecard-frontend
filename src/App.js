@@ -21,7 +21,8 @@ class App extends Component {
       lastName: 'Kersten',
       email: 'dk@hi.com'
     },
-    curentUserScorecards: []
+    curentUserScorecards: [],
+    currentScorecardToUpdate: ''
   }
 
   componentDidMount() {
@@ -49,6 +50,12 @@ class App extends Component {
     })
   }
 
+  updateEditScorecard = (scorecardId) => {
+    this.setState({
+      currentScorecardToUpdate: scorecardId
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -56,15 +63,22 @@ class App extends Component {
 
         <Switch>
 
-          <Route path="/scorecard" render={() => <ScoreCard 
+          <Route path="/scorecard/new" render={() => <ScoreCard 
             courses={this.state.courses}
             userId={this.state.currentUser.id} />} 
+          />
+
+          <Route path="/scorecard/edit" render={() => <ScoreCard 
+            courses={this.state.courses}
+            userId={this.state.currentUser.id}
+            scorecardID={this.state.currentScorecardToUpdate} />} 
           />
 
           <Route path="/profile" render={() => <Profile 
             user={this.state.currentUser} 
             courses={this.state.courses} 
-            scorecards={this.state.curentUserScorecards} />} 
+            scorecards={this.state.curentUserScorecards}
+            editScorecardFunc={this.updateEditScorecard} />} 
           />
 
           <Route path="/courses/:id" component={CourseContainer} />

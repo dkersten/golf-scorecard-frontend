@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class ScorecardOverview extends Component {
 
@@ -65,6 +66,11 @@ class ScorecardOverview extends Component {
             .then(() => this.setState({ state: this.state }))
     }
 
+    editRound = e => {
+        // console.log(this.props.scorecardID)
+        this.props.editScorecardFunc(this.props.scorecardID)
+    }
+
     render() {
         this.formatDate()
         return(
@@ -80,7 +86,7 @@ class ScorecardOverview extends Component {
                 {
                     this.state.moreClicked ?
                     <div className="options">
-                        <button className="btn edit">Edit</button>
+                        <NavLink to="/scorecard/edit" onClick={this.editRound} className="btn edit">Edit</NavLink>
                         <button onClick={this.deleteRound} className="btn delete">Delete</button>
                     </div>
                     :

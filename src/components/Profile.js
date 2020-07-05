@@ -94,7 +94,8 @@ const Profile = (props) => {
                                     scoresBack={scorecard.scores_back}
                                     scorecardID={scorecard.id}
                                     courseID={scorecard.course_id}
-                                    courses={props.courses} />)
+                                    courses={props.courses}
+                                    editScorecardFunc={props.editScorecardFunc} />)
                             }
                         </div>
                     </div>

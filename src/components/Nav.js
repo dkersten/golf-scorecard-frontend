@@ -35,7 +35,7 @@ class Nav extends Component {
         return(
             <div onClick={this.closeNavMenu} className="nav-links">
                 <ul>
-                    <li><NavLink to="/scorecard">Create New Scorecard</NavLink></li>
+                    <li><NavLink to="/scorecard/new">Create New Scorecard</NavLink></li>
                     <li><NavLink to="/profile">Profile</NavLink></li>
                     <li><NavLink to="/courses">Courses</NavLink></li>
                 </ul>

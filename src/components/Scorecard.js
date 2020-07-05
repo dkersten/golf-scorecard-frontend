@@ -28,7 +28,9 @@ class ScoreCard extends Component {
             16: 0,
             17: 0,
             18: 0
-        }
+        },
+        scorecardToEdit: {},
+        editingScorecard: false
     }
 
     cardNumHoles = () => {
@@ -90,7 +92,9 @@ class ScoreCard extends Component {
         resetScores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0, 18: 0
         }
 
-        fetch("http://localhost:3000/scorecards", {
+        if (!this.state.editingScorecard) {
+            console.log("submitting new")
+            fetch("http://localhost:3000/scorecards", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -113,17 +117,43 @@ class ScoreCard extends Component {
                 scores_back: [],
                 numHoles: ''
             }))
+        } else if (this.state.editingScorecard) {
+            console.log("submitting edit")
+            const id = this.state.scorecardToEdit.id
+            console.log(this.state.scores_front, this.state.scores_back)
+            fetch(`http://localhost:3000/scorecards/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                  },
+                  body: JSON.stringify({
+                    scores_front: this.state.scores_front,
+                    scores_back: this.state.scores_back
+                  })              
+            })
+            .then(resp => resp.json())
+                .then(scorecard => console.log(scorecard))
+                .then(() => this.setState({
+                    scores: resetScores
+                }))
+                .then(() => this.setState({
+                    scores_front: [],
+                    scores_back: [],
+                    numHoles: '',
+                    scorecardToEdit: {},
+                    editingScorecard: false
+                }))
+        }
     }
 
     computeScoreTotal = () => {
         const scores = Object.values(this.state.scores)
-        // console.log(scores)
         if (scores.includes(NaN)) {
             return "hole can't be blank"
         } else {
             const add = (a,b) => a + b
             const sum = scores.reduce(add)
-            // console.log(sum)
             return sum
         }
     }
@@ -164,8 +194,51 @@ class ScoreCard extends Component {
         })
     }
 
+    //Edit scorecard specific code below
+    componentDidMount() {
+        const scorecardID = this.props.scorecardID
+
+        if (typeof this.props.scorecardID === "number") {
+            this.setState({
+                editingScorecard: true
+            })
+            fetch(`http://localhost:3000/scorecards/${scorecardID}`)
+                .then(resp => resp.json())
+                .then(scorecard => this.setState({
+                    scorecardToEdit: scorecard
+                }))
+                .then(() => this.populateScorecardData())
+        }
+    }
+
+    populateScorecardData = () => {
+        const f9 = this.state.scorecardToEdit.scores_front
+        const b9 = this.state.scorecardToEdit.scores_back
+        let scoreObj = {}
+
+        if (b9 === null || b9.length === undefined ) {
+            this.setState({
+                numHoles: 9
+            })
+            for (let i = 1; i <= f9.length; i++) {
+                scoreObj[i] = (f9[i - 1])
+            }
+        } else {
+            this.setState({
+                numHoles: 18
+            })
+            const scoreArr = f9.concat(b9)
+            for (let i = 1; i <= scoreArr.length; i++) {
+                scoreObj[i] = (scoreArr[i - 1])
+            }
+        }
+        this.setState({
+            scores: scoreObj
+        })
+    }
+
     render() {
-        // console.log(this.state)
+        console.log(this.state)
         return(
             <div className="scorecard">
                 <main>
