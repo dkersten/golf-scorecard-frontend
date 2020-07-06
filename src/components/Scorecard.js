@@ -118,7 +118,7 @@ class ScoreCard extends Component {
                 numHoles: ''
             }))
         } else if (this.state.editingScorecard) {
-            console.log("submitting edit")
+            // console.log("submitting edit")
             const id = this.state.scorecardToEdit.id
             // console.log(this.state.scores_front, this.state.scores_back)
             fetch(`http://localhost:3000/scorecards/${id}`, {
@@ -217,20 +217,20 @@ class ScoreCard extends Component {
         const b9 = this.state.scorecardToEdit.scores_back
         let scoreObj = {}
 
-        if (b9 === null || b9.length === undefined ) {
-            this.setState({
-                numHoles: 9
-            })
-            for (let i = 1; i <= f9.length; i++) {
-                scoreObj[i] = (f9[i - 1])
-            }
-        } else {
+        if ( b9.length > 0 ) {
             this.setState({
                 numHoles: 18
             })
             const scoreArr = f9.concat(b9)
             for (let i = 1; i <= scoreArr.length; i++) {
                 scoreObj[i] = (scoreArr[i - 1])
+            }
+        } else {
+            this.setState({
+                numHoles: 9
+            })
+            for (let i = 1; i <= f9.length; i++) {
+                scoreObj[i] = (f9[i - 1])
             }
         }
         this.setState({

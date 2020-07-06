@@ -57,6 +57,7 @@ class App extends Component {
     })
   }
 
+  //update state (current user/logged in) when a new user signs up
   updateCurrentUserSignUp = (userObj) => {
     const newUser = {
       id: userObj.id,
@@ -70,6 +71,7 @@ class App extends Component {
     })
   }
 
+  //update state (current user/logged in) when an existing user logs in
   updateCurrentUserLogIn = (userObj) => {
     const returningUser = {
       id: userObj.id,
@@ -83,6 +85,7 @@ class App extends Component {
     })
   }
 
+  // updated state when logout is clicked in Nav component
   navUpdateLogoutState = () => {
     const user = {
       id: '',
@@ -97,6 +100,7 @@ class App extends Component {
     })
   }
 
+  // add new scorecard to state when submit is hit on new scorecard
   newScorecardUpdateArr = (scorecardObj) => {
     const newArr = [...this.state.curentUserScorecards, scorecardObj]
     this.setState({
@@ -104,10 +108,9 @@ class App extends Component {
     })
   }
 
+  // edit scorecard in state (changed) when submit is hit on edit socrecard
   editScorecardUpdateArr = (scorecardObj) => {
-    // console.log(scorecardObj)
     const scorecardID = scorecardObj.id
-    // console.log(scorecardID)
     let scorecards = this.state.curentUserScorecards
     scorecards.forEach(function(scorecard, i) { if (scorecard.id === scorecardID) scorecards[i] = scorecardObj })
     this.setState({
@@ -115,8 +118,17 @@ class App extends Component {
     })
   }
 
+  //remove scorecard from state when the delete button is clicked on profile component
+  deleteScorecardUpdateArr = (scorecardID) => {
+    console.log(scorecardID)
+    const scorecards = this.state.curentUserScorecards
+    const updatedScorecards = scorecards.filter(item => item.id !== scorecardID )
+    this.setState({
+      curentUserScorecards: updatedScorecards
+    })
+  }
+
   render() {
-    // console.log(this.state)
     return (
       <div className="App">
         {
@@ -142,7 +154,8 @@ class App extends Component {
             user={this.state.currentUser} 
             courses={this.state.courses} 
             scorecards={this.state.curentUserScorecards}
-            editScorecardFunc={this.updateEditScorecard} />} 
+            editScorecardFunc={this.updateEditScorecard}
+            deleteScorecardFunc={this.deleteScorecardUpdateArr} />} 
           />
 
           <Route path="/courses/:id" component={CourseContainer} />

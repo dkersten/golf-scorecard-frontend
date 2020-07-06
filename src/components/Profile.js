@@ -95,7 +95,8 @@ const Profile = (props) => {
                                     scorecardID={scorecard.id}
                                     courseID={scorecard.course_id}
                                     courses={props.courses}
-                                    editScorecardFunc={props.editScorecardFunc} />)
+                                    editScorecardFunc={props.editScorecardFunc}
+                                    deleteScorecardFunc={props.deleteScorecardFunc} />)
                             }
                         </div>
                     </div>
