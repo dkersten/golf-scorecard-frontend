@@ -97,10 +97,21 @@ class App extends Component {
     })
   }
 
-  updateScorecardArr = (scorecardObj) => {
+  newScorecardUpdateArr = (scorecardObj) => {
     const newArr = [...this.state.curentUserScorecards, scorecardObj]
     this.setState({
       curentUserScorecards: newArr
+    })
+  }
+
+  editScorecardUpdateArr = (scorecardObj) => {
+    // console.log(scorecardObj)
+    const scorecardID = scorecardObj.id
+    // console.log(scorecardID)
+    let scorecards = this.state.curentUserScorecards
+    scorecards.forEach(function(scorecard, i) { if (scorecard.id === scorecardID) scorecards[i] = scorecardObj })
+    this.setState({
+      curentUserScorecards: scorecards
     })
   }
 
@@ -117,13 +128,14 @@ class App extends Component {
           <Route path="/scorecard/new" render={() => <ScoreCard 
             courses={this.state.courses}
             userId={this.state.currentUser.id}
-            newScorecardFunc={this.updateScorecardArr} />} 
+            newScorecardFunc={this.newScorecardUpdateArr} />} 
           />
 
           <Route path="/scorecard/edit" render={() => <ScoreCard 
             courses={this.state.courses}
             userId={this.state.currentUser.id}
-            scorecardID={this.state.currentScorecardToUpdate} />} 
+            scorecardID={this.state.currentScorecardToUpdate}
+            editScorecardFunc={this.editScorecardUpdateArr} />} 
           />
 
           <Route path="/profile" render={() => <Profile 

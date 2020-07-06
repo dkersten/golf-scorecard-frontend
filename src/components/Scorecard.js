@@ -108,7 +108,6 @@ class ScoreCard extends Component {
             })
         })
             .then(resp => resp.json())
-            // .then(scorecard => console.log(scorecard))
             .then(scorecard => this.props.newScorecardFunc(scorecard))
             .then(() => this.setState({
                 scores: resetScores
@@ -121,7 +120,7 @@ class ScoreCard extends Component {
         } else if (this.state.editingScorecard) {
             console.log("submitting edit")
             const id = this.state.scorecardToEdit.id
-            console.log(this.state.scores_front, this.state.scores_back)
+            // console.log(this.state.scores_front, this.state.scores_back)
             fetch(`http://localhost:3000/scorecards/${id}`, {
                 method: "PATCH",
                 headers: {
@@ -133,8 +132,9 @@ class ScoreCard extends Component {
                     scores_back: this.state.scores_back
                   })              
             })
-            .then(resp => resp.json())
-                .then(scorecard => console.log(scorecard))
+                .then(resp => resp.json())
+                // .then(scorecard => console.log(scorecard))
+                .then(scorecard => this.props.editScorecardFunc(scorecard))
                 .then(() => this.setState({
                     scores: resetScores
                 }))
