@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 
 class Login extends Component {
 
@@ -16,15 +18,31 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log("login submitted")
+
+        fetch('http://localhost:3000/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            })
+        })
+            .then(resp => resp.json())
+            .then(user => this.props.updateUserFunc(user))
+
         this.setState({
             email: '',
             password: ''
         })
     }
 
+
+
     render() {
-        console.log(this.state)
+        // console.log(this.props)
         return (
             <div className="login">
                 <main>

@@ -19,7 +19,23 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log("signup submitted")
+        
+        fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                first_name: this.state.firstName,
+                last_name: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password
+            })
+        })
+        .then(resp => resp.json())
+        .then(user => this.props.updateUserFunc(user))
+
         this.setState({
             firstName: '',
             lastName: '',
@@ -30,12 +46,12 @@ class SignUp extends Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.props)
         return(
             <div className="signup">
                 <main>
                     <div className="inner-container">
-                        <form className="card">
+                        <form onSubmit={this.handleSubmit} className="card">
                             <h1>Sign Up</h1>
 
                             <input name="firstName" value={this.state.firstName} onChange={this.handleChange} placeholder="First Name" type="text"/>

@@ -22,7 +22,8 @@ class App extends Component {
       email: 'dk@hi.com'
     },
     curentUserScorecards: [],
-    currentScorecardToUpdate: ''
+    currentScorecardToUpdate: '',
+    loggedIn: false
   }
 
   componentDidMount() {
@@ -56,7 +57,34 @@ class App extends Component {
     })
   }
 
+  updateCurrentUserSignUp = (userObj) => {
+    const newUser = {
+      id: userObj.id,
+      firstName: userObj.first_name,
+      lastName: userObj.last_name,
+      email: userObj.email
+    }
+    this.setState({
+      currentUser: newUser,
+      loggedIn: true
+    })
+  }
+
+  updateCurrentUserLogIn = (userObj) => {
+    const returningUser = {
+      id: userObj.id,
+      firstName: userObj.first_name,
+      lastName: userObj.last_name,
+      email: userObj.email
+    }
+    this.setState({
+      currentUser: returningUser,
+      loggedIn: true
+    })
+  }
+
   render() {
+    console.log(this.state.currentUser, this.state.loggedIn)
     return (
       <div className="App">
         <Nav />
@@ -88,9 +116,9 @@ class App extends Component {
             holes={this.state.holes} />} 
           />
 
-          <Route path="/login" render={() => <Login />} />
+          <Route path="/login" render={() => <Login updateUserFunc={this.updateCurrentUserLogIn} />} />
 
-          <Route path="/signup" render={() => <Signup />} />
+          <Route path="/signup" render={() => <Signup updateUserFunc={this.updateCurrentUserSignUp} />} />
 
           <Route path="/" component={Landing} />
 
