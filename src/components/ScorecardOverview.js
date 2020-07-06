@@ -7,6 +7,7 @@ class ScorecardOverview extends Component {
         moreClicked: false
     }
 
+    // gets course name for scorecard overview card
     courseName = () => {
         for (const course of this.props.courses) {
             if (course.id === this.props.courseID) {
@@ -15,6 +16,7 @@ class ScorecardOverview extends Component {
         }
     }
 
+    //formats created_at property from backend to readable date
     formatDate = () => {
         let dateObj = new Date(this.props.date)
         let month = dateObj.getMonth()
@@ -24,6 +26,7 @@ class ScorecardOverview extends Component {
         return date
     }
 
+    // computes total score from api front and back 9 arrays
     computeScore = () => {
         if (this.props.scoresFront !== null && this.props.scoresBack !== null ) {
             const totalScoreArr = this.props.scoresFront.concat(this.props.scoresBack)
@@ -47,14 +50,16 @@ class ScorecardOverview extends Component {
         }
         
     }
+
+    // toggle state for options functionality
     toggleMore = () => {
         this.setState({
             moreClicked: !this.state.moreClicked
         })
     }
 
+    // deletes round from backend and passes scorecard id up to app so it can be removed from state
     deleteRound = e => {
-        // console.log(e.target.parentNode.parentNode.remove())
         fetch(`http://localhost:3000/scorecards/${this.props.scorecardID}`, {
             method: "DELETE",
             headers: {
@@ -63,12 +68,11 @@ class ScorecardOverview extends Component {
               }
         })
             .then(resp => resp.json())
-            .then(scorecard => console.log(scorecard))
-            .then(() => this.setState({ state: this.state }))
+            .then(() => this.props.deleteScorecardFunc(this.props.scorecardID))
     }
 
+    // passes scorecard id up to app for scorecard (edit) component
     editRound = e => {
-        // console.log(this.props.scorecardID)
         this.props.editScorecardFunc(this.props.scorecardID)
     }
 

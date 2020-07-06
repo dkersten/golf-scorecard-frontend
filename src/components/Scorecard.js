@@ -108,7 +108,7 @@ class ScoreCard extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(scorecard => console.log(scorecard))
+            .then(scorecard => this.props.newScorecardFunc(scorecard))
             .then(() => this.setState({
                 scores: resetScores
             }))
@@ -118,9 +118,9 @@ class ScoreCard extends Component {
                 numHoles: ''
             }))
         } else if (this.state.editingScorecard) {
-            console.log("submitting edit")
+            // console.log("submitting edit")
             const id = this.state.scorecardToEdit.id
-            console.log(this.state.scores_front, this.state.scores_back)
+            // console.log(this.state.scores_front, this.state.scores_back)
             fetch(`http://localhost:3000/scorecards/${id}`, {
                 method: "PATCH",
                 headers: {
@@ -132,8 +132,9 @@ class ScoreCard extends Component {
                     scores_back: this.state.scores_back
                   })              
             })
-            .then(resp => resp.json())
-                .then(scorecard => console.log(scorecard))
+                .then(resp => resp.json())
+                // .then(scorecard => console.log(scorecard))
+                .then(scorecard => this.props.editScorecardFunc(scorecard))
                 .then(() => this.setState({
                     scores: resetScores
                 }))
@@ -216,20 +217,20 @@ class ScoreCard extends Component {
         const b9 = this.state.scorecardToEdit.scores_back
         let scoreObj = {}
 
-        if (b9 === null || b9.length === undefined ) {
-            this.setState({
-                numHoles: 9
-            })
-            for (let i = 1; i <= f9.length; i++) {
-                scoreObj[i] = (f9[i - 1])
-            }
-        } else {
+        if ( b9.length > 0 ) {
             this.setState({
                 numHoles: 18
             })
             const scoreArr = f9.concat(b9)
             for (let i = 1; i <= scoreArr.length; i++) {
                 scoreObj[i] = (scoreArr[i - 1])
+            }
+        } else {
+            this.setState({
+                numHoles: 9
+            })
+            for (let i = 1; i <= f9.length; i++) {
+                scoreObj[i] = (f9[i - 1])
             }
         }
         this.setState({
@@ -238,7 +239,7 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <div className="scorecard">
                 <main>

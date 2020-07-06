@@ -4,6 +4,7 @@ import ScorecardOverview from './ScorecardOverview.js'
 const Profile = (props) => {
 
     const scorecards = props.scorecards
+    console.log(scorecards)
 
     const bestRoundScore18 = () => {
         const scoresArr = []
@@ -66,11 +67,16 @@ const Profile = (props) => {
     }
 
     const numofRounds = () => {
-        if (scorecards.length === 0) {
-            return "no"
+        if (scorecards !== undefined) {
+            if (scorecards.length === 0) {
+                return "no"
+            } else {
+                return scorecards.length
+            }
         } else {
-            return scorecards.length
+            return "NA"
         }
+        
     }
 
     return(
@@ -95,7 +101,8 @@ const Profile = (props) => {
                                     scorecardID={scorecard.id}
                                     courseID={scorecard.course_id}
                                     courses={props.courses}
-                                    editScorecardFunc={props.editScorecardFunc} />)
+                                    editScorecardFunc={props.editScorecardFunc}
+                                    deleteScorecardFunc={props.deleteScorecardFunc} />)
                             }
                         </div>
                     </div>
