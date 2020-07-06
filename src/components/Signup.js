@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class SignUp extends Component {
 
@@ -35,14 +36,16 @@ class SignUp extends Component {
         })
         .then(resp => resp.json())
         .then(user => this.props.updateUserFunc(user))
-
-        this.setState({
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            passConf: ''
+        .then(() => {
+            this.setState({
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                passConf: ''
+            })
         })
+        .then(() => this.props.history.push('/profile'))
     }
 
     render() {
@@ -75,4 +78,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ScorecardRow from './ScorecardRow.js'
+import ScorecardRow from './ScorecardRow.js';
+import { withRouter } from "react-router-dom";
 
 class ScoreCard extends Component {
 
@@ -117,6 +118,7 @@ class ScoreCard extends Component {
                 scores_back: [],
                 numHoles: ''
             }))
+            .then(() => this.props.history.push('/profile'))
         } else if (this.state.editingScorecard) {
             // console.log("submitting edit")
             const id = this.state.scorecardToEdit.id
@@ -145,6 +147,7 @@ class ScoreCard extends Component {
                     scorecardToEdit: {},
                     editingScorecard: false
                 }))
+                .then(() => this.props.history.push('/profile'))
         }
     }
 
@@ -195,7 +198,7 @@ class ScoreCard extends Component {
         })
     }
 
-    //Edit scorecard specific code below
+    //Edit scorecard specific code below (see if there is an existing scorecard id being passed in)
     componentDidMount() {
         const scorecardID = this.props.scorecardID
 
@@ -239,7 +242,7 @@ class ScoreCard extends Component {
     }
 
     render() {
-        // console.log(this.state)
+        console.log(this.props.history)
         return(
             <div className="scorecard">
                 <main>
@@ -297,4 +300,4 @@ class ScoreCard extends Component {
     }
 }
 
-export default ScoreCard
+export default withRouter(ScoreCard)

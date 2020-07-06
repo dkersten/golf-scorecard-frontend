@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -30,11 +31,14 @@ class Login extends Component {
         })
             .then(resp => resp.json())
             .then(user => this.props.updateUserFunc(user))
-
-        this.setState({
-            email: '',
-            password: ''
-        })
+            .then(() => {
+                this.setState({
+                    email: '',
+                    password: ''
+                })
+            })
+            .then(() => this.props.history.push('/profile'))
+        
     }
 
 
@@ -63,4 +67,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login)
