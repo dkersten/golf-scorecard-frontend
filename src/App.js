@@ -97,8 +97,15 @@ class App extends Component {
     })
   }
 
+  updateScorecardArr = (scorecardObj) => {
+    const newArr = [...this.state.curentUserScorecards, scorecardObj]
+    this.setState({
+      curentUserScorecards: newArr
+    })
+  }
+
   render() {
-    console.log(this.state.currentUser, this.state.loggedIn)
+    // console.log(this.state)
     return (
       <div className="App">
         {
@@ -109,7 +116,8 @@ class App extends Component {
 
           <Route path="/scorecard/new" render={() => <ScoreCard 
             courses={this.state.courses}
-            userId={this.state.currentUser.id} />} 
+            userId={this.state.currentUser.id}
+            newScorecardFunc={this.updateScorecardArr} />} 
           />
 
           <Route path="/scorecard/edit" render={() => <ScoreCard 

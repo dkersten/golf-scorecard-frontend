@@ -108,7 +108,8 @@ class ScoreCard extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(scorecard => console.log(scorecard))
+            // .then(scorecard => console.log(scorecard))
+            .then(scorecard => this.props.newScorecardFunc(scorecard))
             .then(() => this.setState({
                 scores: resetScores
             }))
@@ -238,7 +239,7 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <div className="scorecard">
                 <main>
