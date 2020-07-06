@@ -23,7 +23,7 @@ class App extends Component {
     },
     curentUserScorecards: [],
     currentScorecardToUpdate: '',
-    loggedIn: false
+    loggedIn: true
   }
 
   componentDidMount() {
@@ -83,11 +83,27 @@ class App extends Component {
     })
   }
 
+  navUpdateLogoutState = () => {
+    const user = {
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: ''
+    }
+
+    this.setState({
+      loggedIn: false,
+      currentUser: user
+    })
+  }
+
   render() {
     console.log(this.state.currentUser, this.state.loggedIn)
     return (
       <div className="App">
-        <Nav />
+        {
+          this.state.loggedIn ? <Nav loggedIn={this.state.loggedIn} logoutFunc={this.navUpdateLogoutState} /> : null
+        }
 
         <Switch>
 

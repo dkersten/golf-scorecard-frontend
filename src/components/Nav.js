@@ -31,6 +31,10 @@ class Nav extends Component {
         })
     }
 
+    handleLogOut = () => {
+        this.props.logoutFunc()
+    }
+
     navOpen = () => {
         return(
             <div onClick={this.closeNavMenu} className="nav-links">
@@ -38,6 +42,7 @@ class Nav extends Component {
                     <li><NavLink to="/scorecard/new">Create New Scorecard</NavLink></li>
                     <li><NavLink to="/profile">Profile</NavLink></li>
                     <li><NavLink to="/courses">Courses</NavLink></li>
+                    <li><NavLink onClick={this.handleLogOut} to="/">Log Out</NavLink></li>
                 </ul>
             </div>
         )

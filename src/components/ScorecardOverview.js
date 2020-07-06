@@ -54,6 +54,7 @@ class ScorecardOverview extends Component {
     }
 
     deleteRound = e => {
+        // console.log(e.target.parentNode.parentNode.remove())
         fetch(`http://localhost:3000/scorecards/${this.props.scorecardID}`, {
             method: "DELETE",
             headers: {
