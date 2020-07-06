@@ -16,10 +16,10 @@ class App extends Component {
     courses: [],
     holes: [],
     currentUser: {
-      id: 1,
+      id: 12,
       firstName: 'Dan',
       lastName: 'Kersten',
-      email: 'dk@hi.com'
+      email: 'dan@danielkersten.io'
     },
     curentUserScorecards: [],
     currentScorecardToUpdate: '',
