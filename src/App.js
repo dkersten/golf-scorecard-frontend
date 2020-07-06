@@ -16,10 +16,10 @@ class App extends Component {
     courses: [],
     holes: [],
     currentUser: {
-      id: 1,
-      firstName: 'Dan',
-      lastName: 'Kersten',
-      email: 'dk@hi.com'
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: ''
     },
     curentUserScorecards: [],
     currentScorecardToUpdate: '',
@@ -129,6 +129,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="App">
         {
