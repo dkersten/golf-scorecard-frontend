@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   updateCurrentUserScorecards = (user) => {
-    // console.log(scorecards.scorecards)
     this.setState({
       curentUserScorecards: user.scorecards
     })
@@ -120,7 +119,6 @@ class App extends Component {
 
   //remove scorecard from state when the delete button is clicked on profile component
   deleteScorecardUpdateArr = (scorecardID) => {
-    console.log(scorecardID)
     const scorecards = this.state.curentUserScorecards
     const updatedScorecards = scorecards.filter(item => item.id !== scorecardID )
     this.setState({
@@ -129,7 +127,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="App">
         {

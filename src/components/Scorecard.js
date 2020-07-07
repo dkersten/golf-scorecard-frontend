@@ -242,7 +242,7 @@ class ScoreCard extends Component {
     }
 
     render() {
-        console.log(this.props.history)
+        // console.log(this.props.history)
         return(
             <div className="scorecard">
                 <main>
